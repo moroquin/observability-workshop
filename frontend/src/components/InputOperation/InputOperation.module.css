@@ -1,0 +1,43 @@
+.list {
+  list-style-type: none;
+  text-align: center;
+}
+
+.article {
+  width: 40%;
+}
+
+.error {
+  font-style: oblique;
+  font-size: x-small;
+  color: red;
+}
+
+.comment {
+  font-style: oblique;
+  font-size: x-small;
+  color: blue;
+}
+
+.inputName {
+  width: 60%;
+}
+
+.submit {
+  border-radius: 70px;
+  background: linear-gradient(145deg, #d5d5d5, #acaaaa);
+  box-shadow: 37px 37px 73px #bababa, -37px -37px 73px #ffffff;
+
+  display: inline - block;
+  margin: 0.5rem;
+
+  opacity: 0.6;
+  font-style: italic;
+}
+
+.submit:hover {
+  opacity: 1;
+  color: black;
+  font-weight: bold;
+  font-style: normal;
+}

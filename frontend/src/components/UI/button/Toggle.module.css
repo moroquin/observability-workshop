@@ -1,0 +1,48 @@
+.toggleBlock{
+  display: block;
+  height: 32px;
+}
+
+.toggleParragraph{
+  display: inline-block;
+  margin-left: 10px;
+  
+}
+
+.toggleBtn {
+  background-color: #b7b7b7;
+  border: 1px solid #aaa;
+  border-radius: 99px;
+  width: 50px;
+  height: 28px;
+  transition: background-color 0.1s ease, border-color 0.2s ease;
+  cursor: pointer;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0, 748);
+  position: relative;
+ 
+}
+
+.toggleBtn .thumb {
+  height: 20px;
+  width: 20px;
+  background-color: #fff;
+  border-radius: 99px;
+  transform: translatex(0);
+  transition: left 0.15s ease;
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.toggleBtn.toggled {
+  background-color: #15b58e;
+}
+
+.toggleBtn:hover {
+  border-color: #6f6f6f;
+}
+
+.toggleBtn.toggled .thumb {
+  left: calc(50px - 25px);
+}
