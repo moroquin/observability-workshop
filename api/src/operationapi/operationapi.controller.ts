@@ -1,4 +1,12 @@
-import { Body, Controller, Get, HttpStatus, Post, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  Logger,
+  Post,
+  Res,
+} from '@nestjs/common';
 import { HistoryService } from '../history/history.service';
 import { CreateOperationDto } from '../common/dto/CreateOperationDto';
 import { ParserService } from '../parser/parser.service';
@@ -9,6 +17,7 @@ import { getSegment } from 'aws-xray-sdk-core';
 
 @Controller('operations')
 export class OperationapiController {
+  private readonly logger = new Logger();
   constructor(
     private readonly historyService: HistoryService,
     private readonly parserService: ParserService,
@@ -20,14 +29,31 @@ export class OperationapiController {
     return this.historyService.getAll();
   }
 
-  @Post('/error')
-  async returnError(@Res() res: Response) {
-    const firstSeg = getSegment().addNewSubsegment('Error sub segment');
+  @Post('/errorlocal')
+  async returnErrorLocal(@Res() res: Response) {
+    this.logger.log('Creating errors to the api gw');
+    this.logger.log('Waiting a 2 seconds to improve x-ray traces');
     await new Promise((resolve) => {
       setTimeout(resolve, 2000);
     });
-    firstSeg.close();
+    this.logger.log('finish timeout');
+    this.logger.log('Forbidden');
+    return res
+      .status(HttpStatus.FORBIDDEN)
+      .json({ message: 'Error in the payload' });
+  }
 
+  @Post('/error')
+  async returnError(@Res() res: Response) {
+    this.logger.log('Creating errors to the api gw');
+    const firstSeg = getSegment().addNewSubsegment('Error sub segment');
+    this.logger.warn('Waiting a 2 seconds to improve x-ray traces');
+    await new Promise((resolve) => {
+      setTimeout(resolve, 2000);
+    });
+    this.logger.warn('finish timeout');
+    firstSeg.close();
+    this.logger.error('Forbidden');
     return res
       .status(HttpStatus.FORBIDDEN)
       .json({ message: 'Error in the payload' });

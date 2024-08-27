@@ -2,8 +2,10 @@ import { NestFactory } from '@nestjs/core';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { bootstrapLambda } from './lambda.bootstrap';
 import { OperationapiModule } from './operationapi/operationapi.module';
+import { Logger } from 'nestjs-pino';
 
 function attachPipes(app: INestApplication<any>) {
+  app.useLogger(app.get(Logger));
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
