@@ -6,7 +6,7 @@ import { HistoryService } from '../history/history.service';
 
 @Module({
   imports: [OperationapiModule],
-  controllers: [ OperationapiController],
+  controllers: [OperationapiController],
   providers: [ParserService, WorkerService, HistoryService],
 })
 export class OperationapiModule {}

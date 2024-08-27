@@ -5,7 +5,6 @@ import { ExpressAdapter } from '@nestjs/platform-express';
 import { INestApplication } from '@nestjs/common';
 import { OperationapiModule } from './operationapi/operationapi.module';
 
-
 let cachedServer: any;
 
 export const bootstrapLambda = async (
@@ -19,7 +18,10 @@ export const bootstrapLambda = async (
     const expressAdapter = new ExpressAdapter(expressApp);
 
     // create a nest app using the express adapter
-    const nestApp = await NestFactory.create(OperationapiModule, expressAdapter);
+    const nestApp = await NestFactory.create(
+      OperationapiModule,
+      expressAdapter,
+    );
     nestApp.enableCors();
 
     // configure nest application

@@ -5,32 +5,47 @@ import { ParserService } from '../parser/parser.service';
 import { WorkerService } from '../worker/worker.service';
 import { Response } from 'express';
 import { eOperationType, iOperationArray } from '../common/interface/operation';
+import { getSegment } from 'aws-xray-sdk-core';
 
 @Controller('operations')
 export class OperationapiController {
   constructor(
     private readonly historyService: HistoryService,
     private readonly parserService: ParserService,
-    private readonly workerService: WorkerService
+    private readonly workerService: WorkerService,
   ) {}
 
   @Get()
   getHistoryOperations(): iOperationArray {
-    console.log("holitas holitas")
     return this.historyService.getAll();
+  }
+
+  @Post('/error')
+  async returnError(@Res() res: Response) {
+    const firstSeg = getSegment().addNewSubsegment('Error sub segment');
+    await new Promise((resolve) => {
+      setTimeout(resolve, 2000);
+    });
+    firstSeg.close();
+
+    return res
+      .status(HttpStatus.FORBIDDEN)
+      .json({ message: 'Error in the payload' });
   }
 
   @Post()
   executeNewOperation(
-    @Body() createOperationDto: CreateOperationDto,
-    @Res() res: Response
+    @Body('operationText') operationText: string,
+    @Res() res: Response,
   ) {
-    console.log("holitas holitas")
-    if (createOperationDto.operationText === undefined) {
+    if (operationText === undefined) {
       return res
         .status(HttpStatus.BAD_REQUEST)
         .json({ message: 'Error in the payload' });
     }
+
+    const createOperationDto = new CreateOperationDto();
+    createOperationDto.operationText = operationText;
 
     const operation = this.parserService.parseOperation({
       type: eOperationType.unkown,

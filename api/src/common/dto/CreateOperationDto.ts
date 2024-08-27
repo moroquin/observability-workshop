@@ -1,4 +1,3 @@
-
 export class CreateOperationDto {
-    operationText: string
+  operationText: string;
 }
