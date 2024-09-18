@@ -1,0 +1,147 @@
+{
+	"info": {
+		"_postman_id": "4ad625b1-4c2c-4ea4-848c-ab64891b5d36",
+		"name": "Workshop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12603956"
+	},
+	"item": [
+		{
+			"name": "Operation",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"operationText\": \"4,+,8\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_BACK}}/operations",
+					"host": [
+						"{{URL_BACK}}"
+					],
+					"path": [
+						"operations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Operation",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{URL_BACK}}/operations",
+					"host": [
+						"{{URL_BACK}}"
+					],
+					"path": [
+						"operations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Operation 4xx Error",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{URL_BACK}}/operations/error/",
+					"host": [
+						"{{URL_BACK}}"
+					],
+					"path": [
+						"operations",
+						"error",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Operation 4xx Error Local",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{URL_BACK}}/operations/errorlocal/",
+					"host": [
+						"{{URL_BACK}}"
+					],
+					"path": [
+						"operations",
+						"errorlocal",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

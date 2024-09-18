@@ -65,6 +65,9 @@ export class OperationapiController {
     @Res() res: Response,
   ) {
     if (operationText === undefined) {
+      this.logger.error(
+        'ERROR: Bad request. operation_Text missing in the payload. ',
+      );
       return res
         .status(HttpStatus.BAD_REQUEST)
         .json({ message: 'Error in the payload' });
@@ -82,6 +85,9 @@ export class OperationapiController {
     });
 
     if (operation.error) {
+      this.logger.error(
+        'Error: parser error: incorrect operation or wrong numbers',
+      );
       return res
         .status(HttpStatus.BAD_REQUEST)
         .json({ message: operation.message });

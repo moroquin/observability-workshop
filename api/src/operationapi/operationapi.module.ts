@@ -15,12 +15,6 @@ import { Request } from 'express';
     OperationapiModule,
     LoggerModule.forRoot({
       pinoHttp: {
-        transport: {
-          target: 'pino-pretty',
-          options: {
-            messageKey: 'message',
-          },
-        },
         messageKey: 'message',
         customProps: (req: Request) => {
           return {

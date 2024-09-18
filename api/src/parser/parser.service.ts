@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import {
   eOperationType,
   iOperation,
@@ -7,6 +7,7 @@ import {
 
 @Injectable()
 export class ParserService {
+  private readonly logger = new Logger();
   private isANumber(operating: string): boolean {
     return (
       operating != null &&
@@ -18,6 +19,7 @@ export class ParserService {
   public parseOperation(operation: iOperation): iOperationParsered {
     const operationItems: string[] = operation.operationText.split(',');
     if (operationItems.length !== 3) {
+      this.logger.error('Parser Error: should be 3 ');
       return {
         operationType: eOperationType.unkown,
         error: true,
@@ -29,6 +31,7 @@ export class ParserService {
 
     const operationType = this.getOperationType(operationItems[1]);
     if (operationType === eOperationType.unkown) {
+      this.logger.error('Parser Error: operation unkown');
       return {
         operationType: eOperationType.unkown,
         error: true,
@@ -42,6 +45,7 @@ export class ParserService {
       !this.isANumber(operationItems[0]) ||
       !this.isANumber(operationItems[2])
     ) {
+      this.logger.error('Parser Error: Incorrects numbers');
       return {
         operationType: eOperationType.unkown,
         error: true,
