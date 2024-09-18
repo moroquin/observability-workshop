@@ -14,8 +14,8 @@ export class CdkStack extends cdk.Stack {
     
 
     // Create a new lambda function
-    const LambdaHandler = new DockerImageFunction(this, "LambdaHandlerF", {
-      functionName: "LambdaHandlerF",
+    const LambdaHandler = new DockerImageFunction(this, "LambdaHandlerV1", {
+      functionName: "LambdaHandlerV1",
       code: DockerImageCode.fromImageAsset(path.join(__dirname, "../../api")),
       tracing: Tracing.ACTIVE,
       timeout: cdk.Duration.minutes(1),

@@ -34,9 +34,10 @@ npm run start
 
 You need:
 
-- Have an amazon account.
-- Be logged into the terminal you are using with your amazon account. To be able to execute the cdk commands.
-- Install the amazon cdk.
+* Have an amazon account.
+* Be logged into the terminal you are using with your amazon account. To be able to execute the cdk commands.
+* Install the amazon cdk.
+* Docker deamon running.
 
 ### Commands
 
